@@ -20,7 +20,7 @@ namespace TicTacToe_006
             {
                 return false;
             }
-            if (moves[moveLocation -1] == Convert.ToString(ApprovedSymbols.x) || moves[moveLocation -1] == Convert.ToString(ApprovedSymbols.o))
+            if (moves[moveLocation -1] == Convert.ToString(ApprovedSymbols.X) || moves[moveLocation -1] == Convert.ToString(ApprovedSymbols.O))
             {
                 return false;
             }
