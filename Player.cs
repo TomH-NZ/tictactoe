@@ -26,12 +26,13 @@ namespace TicTacToe_006
             PlayerName = playerName;
             Symbol = symbol;
         }
-        public static string EnterMove(string playerName)
+
+        private static string EnterMove(string playerName)
         {
             Console.WriteLine(playerName + ", please enter a move or press q to quit: ");
             Console.WriteLine();
-            string playermove = Console.ReadLine();
-            return playermove;
+            var playerMove = Console.ReadLine();
+            return playerMove;
         }
     }
 }

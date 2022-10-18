@@ -1,5 +1,4 @@
 using System;
-using System.Xml;
 
 namespace TicTacToe_006
 {
@@ -16,12 +15,10 @@ namespace TicTacToe_006
             while (!board.ValidateMove(move))
             {
                 move = Convert.ToString(randomMove.Next(0, 8));
-                if (board.ValidateMove(move))
-                {
-                    board.AddMove(move, Symbol);
-                    Console.WriteLine("The PC moved at grid " + move);
-                    break;
-                }
+                if (!board.ValidateMove(move)) continue;
+                board.AddMove(move, Symbol);
+                Console.WriteLine("The PC moved at grid " + move);
+                break;
             }
         }
         public ComputerPlayer(string playerName, string symbol)

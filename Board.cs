@@ -4,41 +4,37 @@ namespace TicTacToe_006
 {
     public class Board
     {
-        private string[] moves = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        private readonly string[] _moves = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
         public bool ValidateMove(string playerMove)
         {
             if (playerMove == "q")
             {
                 Environment.Exit(0);
             }
-            bool errorMove = int.TryParse(playerMove, out int moveLocation);
+            var errorMove = int.TryParse(playerMove, out int moveLocation);
             if (!errorMove)
             {
                 return false;
             }
-            if (moveLocation <1 || moveLocation > 9)
+            if (moveLocation is < 1 or > 9)
             {
                 return false;
             }
-            if (moves[moveLocation -1] == Convert.ToString(ApprovedSymbols.X) || moves[moveLocation -1] == Convert.ToString(ApprovedSymbols.O))
-            {
-                return false;
-            }
-            return true;
+            return _moves[moveLocation -1] != Convert.ToString(ApprovedSymbols.X) && _moves[moveLocation -1] != Convert.ToString(ApprovedSymbols.O);
         }
         public string Display()
         {
-            var board = moves[0] + "|" + moves[1] + "|" + moves[2] + "\n" + moves[3] + "|" + moves[4] + "|" + moves[5] + "\n" + moves[6] + "|" + moves[7] + "|" + moves[8];
+            var board = _moves[0] + "|" + _moves[1] + "|" + _moves[2] + "\n" + _moves[3] + "|" + _moves[4] + "|" + _moves[5] + "\n" + _moves[6] + "|" + _moves[7] + "|" + _moves[8];
             return board;
         }
         public void AddMove(string playerMove, string playerSymbol)
         {
             var moveLocation = Convert.ToInt32(playerMove);
-            moves[moveLocation - 1] = playerSymbol;
+            _moves[moveLocation - 1] = playerSymbol;
         }
         public bool IsBoardFull()
         {
-            foreach (var symbol in moves)
+            foreach (var symbol in _moves)
             {
                 if (symbol != "x" && symbol != "o")
                 {
@@ -49,24 +45,19 @@ namespace TicTacToe_006
         }
         public bool HasWon(string playerSymbol)
         {
-            if ((moves[0] == playerSymbol && moves[1] == playerSymbol && moves[2] == playerSymbol) ||
-                (moves[3] == playerSymbol && moves[4] == playerSymbol && moves[5] == playerSymbol) ||
-                (moves[6] == playerSymbol && moves[7] == playerSymbol && moves[8] == playerSymbol))
+            if ((_moves[0] == playerSymbol && _moves[1] == playerSymbol && _moves[2] == playerSymbol) ||
+                (_moves[3] == playerSymbol && _moves[4] == playerSymbol && _moves[5] == playerSymbol) ||
+                (_moves[6] == playerSymbol && _moves[7] == playerSymbol && _moves[8] == playerSymbol))
             {
                 return true;
             }
-            if ((moves[0] == playerSymbol && moves[3] == playerSymbol && moves[6] == playerSymbol) || 
-                (moves[1] == playerSymbol && moves[4] == playerSymbol && moves[7] == playerSymbol) || 
-                (moves[2] == playerSymbol && moves[5] == playerSymbol && moves[8] == playerSymbol))
+            if ((_moves[0] == playerSymbol && _moves[3] == playerSymbol && _moves[6] == playerSymbol) || 
+                (_moves[1] == playerSymbol && _moves[4] == playerSymbol && _moves[7] == playerSymbol) || 
+                (_moves[2] == playerSymbol && _moves[5] == playerSymbol && _moves[8] == playerSymbol))
             {
                 return true;
             }
-            if ((moves[0] == playerSymbol && moves[4] == playerSymbol && moves[8] == playerSymbol) || (moves[2] == playerSymbol && moves[4] == playerSymbol && moves[6] == playerSymbol))
-            {
-                return true;
-            }
-
-            return false;
+            return (_moves[0] == playerSymbol && _moves[4] == playerSymbol && _moves[8] == playerSymbol) || (_moves[2] == playerSymbol && _moves[4] == playerSymbol && _moves[6] == playerSymbol);
         }
         public void CheckIfBoardIsFull(Board board)
         {
