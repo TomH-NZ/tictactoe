@@ -13,12 +13,10 @@ namespace TicTacToe_006
             {
                 Console.WriteLine(board.Display());
                 move = EnterMove(PlayerName);
-                if (board.ValidateMove(move))
-                {
-                    board.AddMove(move, Symbol);
-                    Console.WriteLine(board.Display());
-                    break;
-                }
+                if (!board.ValidateMove(move)) continue;
+                board.AddMove(move, Symbol);
+                Console.WriteLine(board.Display());
+                break;
             }
         }
         public Player(string symbol, string playerName)

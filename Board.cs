@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 
 namespace TicTacToe_006
 {
@@ -11,7 +12,7 @@ namespace TicTacToe_006
             {
                 Environment.Exit(0);
             }
-            var errorMove = int.TryParse(playerMove, out int moveLocation);
+            var errorMove = int.TryParse(playerMove, out var moveLocation);
             if (!errorMove)
             {
                 return false;
@@ -34,14 +35,7 @@ namespace TicTacToe_006
         }
         public bool IsBoardFull()
         {
-            foreach (var symbol in _moves)
-            {
-                if (symbol != "x" && symbol != "o")
-                {
-                    return false;
-                }
-            }
-            return true;
+            return _moves.All(symbol => symbol is "x" or "o");
         }
         public bool HasWon(string playerSymbol)
         {
